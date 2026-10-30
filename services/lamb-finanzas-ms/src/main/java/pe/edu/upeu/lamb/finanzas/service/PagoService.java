@@ -5,6 +5,7 @@ import pe.edu.upeu.lamb.finanzas.dto.PagoResponse;
 import pe.edu.upeu.lamb.finanzas.entity.EstadoPago;
 import pe.edu.upeu.lamb.finanzas.entity.Pago;
 import pe.edu.upeu.lamb.finanzas.event.MatriculaConfirmadaEvento;
+import pe.edu.upeu.lamb.finanzas.exception.BusinessRuleException;
 import pe.edu.upeu.lamb.finanzas.exception.ResourceNotFoundException;
 import pe.edu.upeu.lamb.finanzas.mapper.PagoMapper;
 import pe.edu.upeu.lamb.finanzas.repository.PagoRepository;
@@ -73,8 +74,16 @@ public class PagoService {
 
     public PagoResponse reembolsar(Long id) {
         Pago pago = buscarOFallar(id);
+        validarEstado(pago, EstadoPago.APROBADO, "reembolsar");
         pago.setEstado(EstadoPago.REEMBOLSADO);
         return pagoMapper.toResponse(pagoRepository.save(pago));
+    }
+
+    private void validarEstado(Pago pago, EstadoPago esperado, String accion) {
+        if (pago.getEstado() != esperado) {
+            throw new BusinessRuleException("No se puede " + accion + " el pago " + pago.getId()
+                    + ": esta en estado " + pago.getEstado() + ", se esperaba " + esperado);
+        }
     }
 
     private Pago buscarOFallar(Long id) {

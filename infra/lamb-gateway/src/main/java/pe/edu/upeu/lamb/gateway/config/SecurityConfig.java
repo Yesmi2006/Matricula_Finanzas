@@ -27,6 +27,20 @@ public class SecurityConfig {
             "/api/v1/facultades/**", "/api/v1/programas/**", "/api/v1/personas/**"
     };
 
+    // Rutas de lamb-matricula-ms (excepto /api/v1/matriculas/** que ya tiene regla propia)
+    private static final String[] MATRICULA_DOMINIOS = {
+            "/api/v1/calendario-periodos/**", "/api/v1/reglas-requisitos/**", "/api/v1/oferta-cupos/**",
+            "/api/v1/situacion-estudiante/**", "/api/v1/cursos-carga-academica/**",
+            "/api/v1/rectificacion-retiro-reactivacion/**"
+    };
+
+    // Rutas de lamb-finanzas-ms (excepto /api/v1/pagos/** que ya tiene regla propia)
+    private static final String[] FINANZAS_DOMINIOS = {
+            "/api/v1/saldo-estudiante/**", "/api/v1/catalogos-tarifas/**", "/api/v1/calendario-planes/**",
+            "/api/v1/descuentos-becas/**", "/api/v1/cobros/**", "/api/v1/comprobantes/**",
+            "/api/v1/reembolsos-cancelaciones/**", "/api/v1/control-cierre/**"
+    };
+
     // realm_access.roles (formato Keycloak) -> ROLE_<rol> para hasRole(...)
     @Bean
     public JwtAuthenticationConverter jwtAuthenticationConverter() {
@@ -67,6 +81,10 @@ public class SecurityConfig {
                         .requestMatchers("/api/v1/matriculas/**").hasAnyRole("ADMIN", "COORDINADOR", "ESTUDIANTE")
                         .requestMatchers(HttpMethod.GET, "/api/v1/pagos/**").authenticated()
                         .requestMatchers("/api/v1/pagos/**").hasAnyRole("ADMIN", "COORDINADOR")
+                        .requestMatchers(HttpMethod.GET, MATRICULA_DOMINIOS).authenticated()
+                        .requestMatchers(MATRICULA_DOMINIOS).hasAnyRole("ADMIN", "COORDINADOR", "ESTUDIANTE")
+                        .requestMatchers(HttpMethod.GET, FINANZAS_DOMINIOS).authenticated()
+                        .requestMatchers(FINANZAS_DOMINIOS).hasAnyRole("ADMIN", "COORDINADOR")
                         .anyRequest().authenticated()
                 )
                 .oauth2ResourceServer(oauth2 -> oauth2

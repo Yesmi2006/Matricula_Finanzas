@@ -1,0 +1,115 @@
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+
+ :: Spring Boot ::                (v4.0.8)
+
+2026-10-29T20:03:51.037-05:00  INFO 30996 --- [lamb-eureka] [  restartedMain] p.e.u.lamb.eureka.LambEurekaApplication  : Starting LambEurekaApplication using Java 21.0.12 with PID 30996 (C:\lamb\Lamb_UPeU_v2.0\infra\lamb-eureka\target\classes started by Lenovo in C:\lamb\Lamb_UPeU_v2.0\infra\lamb-eureka)
+2026-10-29T20:03:51.043-05:00  INFO 30996 --- [lamb-eureka] [  restartedMain] p.e.u.lamb.eureka.LambEurekaApplication  : The following 1 profile is active: "dev"
+2026-10-29T20:03:51.116-05:00  INFO 30996 --- [lamb-eureka] [  restartedMain] o.s.c.c.c.ConfigServerConfigDataLoader   : Fetching config from server at : http://localhost:18888
+2026-10-29T20:03:51.116-05:00  INFO 30996 --- [lamb-eureka] [  restartedMain] o.s.c.c.c.ConfigServerConfigDataLoader   : Located environment: name=lamb-eureka, profiles=[default], label=null, version=null, state=null
+2026-10-29T20:03:51.117-05:00  INFO 30996 --- [lamb-eureka] [  restartedMain] o.s.c.c.c.ConfigServerConfigDataLoader   : Fetching config from server at : http://localhost:18888
+2026-10-29T20:03:51.117-05:00  INFO 30996 --- [lamb-eureka] [  restartedMain] o.s.c.c.c.ConfigServerConfigDataLoader   : Located environment: name=lamb-eureka, profiles=[dev], label=null, version=null, state=null
+2026-10-29T20:03:51.122-05:00  INFO 30996 --- [lamb-eureka] [  restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2026-10-29T20:03:51.123-05:00  INFO 30996 --- [lamb-eureka] [  restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2026-10-29T20:03:52.776-05:00  INFO 30996 --- [lamb-eureka] [  restartedMain] o.s.cloud.context.scope.GenericScope     : BeanFactory id=8d653d16-f4c3-36ae-9e7a-cd7ba4951c29
+2026-10-29T20:03:53.492-05:00  INFO 30996 --- [lamb-eureka] [  restartedMain] o.s.boot.tomcat.TomcatWebServer          : Tomcat initialized with port 18761 (http)
+2026-10-29T20:03:53.518-05:00  INFO 30996 --- [lamb-eureka] [  restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-10-29T20:03:53.518-05:00  INFO 30996 --- [lamb-eureka] [  restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/11.0.24]
+2026-10-29T20:03:53.604-05:00  INFO 30996 --- [lamb-eureka] [  restartedMain] b.w.c.s.WebApplicationContextInitializer : Root WebApplicationContext: initialization completed in 2479 ms
+2026-10-29T20:03:55.967-05:00  INFO 30996 --- [lamb-eureka] [  restartedMain] c.n.d.provider.DiscoveryJerseyProvider   : Using JSON encoding codec LegacyJacksonJson
+2026-10-29T20:03:55.968-05:00  INFO 30996 --- [lamb-eureka] [  restartedMain] c.n.d.provider.DiscoveryJerseyProvider   : Using JSON decoding codec LegacyJacksonJson
+2026-10-29T20:03:56.232-05:00  INFO 30996 --- [lamb-eureka] [  restartedMain] c.n.d.provider.DiscoveryJerseyProvider   : Using XML encoding codec XStreamXml
+2026-10-29T20:03:56.232-05:00  INFO 30996 --- [lamb-eureka] [  restartedMain] c.n.d.provider.DiscoveryJerseyProvider   : Using XML decoding codec XStreamXml
+2026-10-29T20:03:56.457-05:00  INFO 30996 --- [lamb-eureka] [  restartedMain] o.s.v.b.OptionalValidatorFactoryBean     : Failed to set up a Bean Validation provider: jakarta.validation.NoProviderFoundException: Unable to create a Configuration, because no Jakarta Validation provider could be found. Add a provider like Hibernate Validator (RI) to your classpath.
+2026-10-29T20:03:57.487-05:00  WARN 30996 --- [lamb-eureka] [  restartedMain] iguration$LoadBalancerCaffeineWarnLogger : Spring Cloud LoadBalancer is currently working with the default cache. While this cache implementation is useful for development and tests, it's recommended to use Caffeine cache in production.You can switch to using Caffeine cache, by adding it and org.springframework.cache.caffeine.CaffeineCacheManager to the classpath.
+2026-10-29T20:03:57.515-05:00  INFO 30996 --- [lamb-eureka] [  restartedMain] o.s.c.n.eureka.InstanceInfoFactory       : Setting initial instance status as: STARTING
+2026-10-29T20:03:57.550-05:00  INFO 30996 --- [lamb-eureka] [  restartedMain] com.netflix.discovery.DiscoveryClient    : Initializing Eureka in region us-east-1
+2026-10-29T20:03:57.550-05:00  INFO 30996 --- [lamb-eureka] [  restartedMain] com.netflix.discovery.DiscoveryClient    : Client configured to neither register nor query for data.
+2026-10-29T20:03:57.554-05:00  INFO 30996 --- [lamb-eureka] [  restartedMain] com.netflix.discovery.DiscoveryClient    : Discovery Client initialized at timestamp 1793322237552 with initial instances count: 0
+2026-10-29T20:03:57.616-05:00  INFO 30996 --- [lamb-eureka] [  restartedMain] c.n.eureka.DefaultEurekaServerContext    : Initializing ...
+2026-10-29T20:03:57.617-05:00  INFO 30996 --- [lamb-eureka] [  restartedMain] c.n.eureka.cluster.PeerEurekaNodes       : Adding new peer nodes [http://localhost:18761/eureka/]
+2026-10-29T20:03:57.781-05:00  INFO 30996 --- [lamb-eureka] [  restartedMain] c.n.d.provider.DiscoveryJerseyProvider   : Using JSON encoding codec LegacyJacksonJson
+2026-10-29T20:03:57.781-05:00  INFO 30996 --- [lamb-eureka] [  restartedMain] c.n.d.provider.DiscoveryJerseyProvider   : Using JSON decoding codec LegacyJacksonJson
+2026-10-29T20:03:57.781-05:00  INFO 30996 --- [lamb-eureka] [  restartedMain] c.n.d.provider.DiscoveryJerseyProvider   : Using XML encoding codec XStreamXml
+2026-10-29T20:03:57.781-05:00  INFO 30996 --- [lamb-eureka] [  restartedMain] c.n.d.provider.DiscoveryJerseyProvider   : Using XML decoding codec XStreamXml
+2026-10-29T20:03:57.826-05:00  INFO 30996 --- [lamb-eureka] [  restartedMain] c.n.eureka.cluster.PeerEurekaNodes       : Replica node URL:  http://localhost:18761/eureka/
+2026-10-29T20:03:57.840-05:00  INFO 30996 --- [lamb-eureka] [  restartedMain] c.n.e.registry.AbstractInstanceRegistry  : Finished initializing remote region registries. All known remote regions: []
+2026-10-29T20:03:57.841-05:00  INFO 30996 --- [lamb-eureka] [  restartedMain] c.n.eureka.DefaultEurekaServerContext    : Initialized
+2026-10-29T20:03:57.849-05:00  INFO 30996 --- [lamb-eureka] [  restartedMain] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 3 endpoints beneath base path '/actuator'
+2026-10-29T20:03:57.927-05:00  INFO 30996 --- [lamb-eureka] [  restartedMain] o.s.c.n.e.s.EurekaServiceRegistry        : Registering application LAMB-EUREKA with eureka with status UP
+2026-10-29T20:03:57.955-05:00  INFO 30996 --- [lamb-eureka] [      Thread-13] o.s.c.n.e.server.EurekaServerBootstrap   : isAws returned false
+2026-10-29T20:03:57.955-05:00  INFO 30996 --- [lamb-eureka] [      Thread-13] o.s.c.n.e.server.EurekaServerBootstrap   : Initialized server context
+2026-10-29T20:03:57.955-05:00  INFO 30996 --- [lamb-eureka] [      Thread-13] c.n.e.r.PeerAwareInstanceRegistryImpl    : Got 1 instances from neighboring DS node
+2026-10-29T20:03:57.957-05:00  INFO 30996 --- [lamb-eureka] [      Thread-13] c.n.e.r.PeerAwareInstanceRegistryImpl    : Renew threshold is: 1
+2026-10-29T20:03:57.957-05:00  INFO 30996 --- [lamb-eureka] [      Thread-13] c.n.e.r.PeerAwareInstanceRegistryImpl    : Changing status to UP
+2026-10-29T20:03:57.963-05:00  INFO 30996 --- [lamb-eureka] [      Thread-13] e.s.EurekaServerInitializerConfiguration : Started Eureka Server
+2026-10-29T20:03:57.995-05:00  INFO 30996 --- [lamb-eureka] [  restartedMain] o.s.boot.tomcat.TomcatWebServer          : Tomcat started on port 18761 (http) with context path '/'
+2026-10-29T20:03:57.996-05:00  INFO 30996 --- [lamb-eureka] [  restartedMain] .s.c.n.e.s.EurekaAutoServiceRegistration : Updating port to 18761
+2026-10-29T20:03:58.027-05:00  INFO 30996 --- [lamb-eureka] [  restartedMain] p.e.u.lamb.eureka.LambEurekaApplication  : Started LambEurekaApplication in 9.394 seconds (process running for 10.882)
+2026-10-29T20:03:58.387-05:00  INFO 30996 --- [lamb-eureka] [io-18761-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-10-29T20:03:58.389-05:00  INFO 30996 --- [lamb-eureka] [io-18761-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2026-10-29T20:03:58.391-05:00  INFO 30996 --- [lamb-eureka] [io-18761-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 2 ms
+2026-10-29T20:04:57.971-05:00  INFO 30996 --- [lamb-eureka] [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 0ms
+2026-10-29T20:05:57.982-05:00  INFO 30996 --- [lamb-eureka] [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 11ms
+2026-10-29T20:06:57.992-05:00  INFO 30996 --- [lamb-eureka] [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 10ms
+2026-10-29T20:07:57.993-05:00  INFO 30996 --- [lamb-eureka] [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 0ms
+2026-10-29T20:08:57.996-05:00  INFO 30996 --- [lamb-eureka] [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 2ms
+2026-10-29T20:09:58.003-05:00  INFO 30996 --- [lamb-eureka] [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 7ms
+2026-10-29T20:10:58.014-05:00  INFO 30996 --- [lamb-eureka] [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 11ms
+2026-10-29T20:11:58.019-05:00  INFO 30996 --- [lamb-eureka] [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 5ms
+2026-10-29T20:12:58.021-05:00  INFO 30996 --- [lamb-eureka] [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 1ms
+2026-10-29T20:13:58.022-05:00  INFO 30996 --- [lamb-eureka] [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 1ms
+2026-10-29T20:14:58.028-05:00  INFO 30996 --- [lamb-eureka] [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 5ms
+2026-10-29T20:15:58.029-05:00  INFO 30996 --- [lamb-eureka] [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 1ms
+2026-10-29T20:16:58.034-05:00  INFO 30996 --- [lamb-eureka] [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 4ms
+2026-10-29T20:17:58.045-05:00  INFO 30996 --- [lamb-eureka] [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 11ms
+2026-10-29T20:18:57.841-05:00  INFO 30996 --- [lamb-eureka] [hresholdUpdater] c.n.e.r.PeerAwareInstanceRegistryImpl    : Current renewal threshold is : 0
+2026-10-29T20:18:58.056-05:00  INFO 30996 --- [lamb-eureka] [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 11ms
+2026-10-29T20:19:58.069-05:00  INFO 30996 --- [lamb-eureka] [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 13ms
+2026-10-29T20:20:58.070-05:00  INFO 30996 --- [lamb-eureka] [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 0ms
+2026-10-29T20:21:58.072-05:00  INFO 30996 --- [lamb-eureka] [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 1ms
+2026-10-29T20:22:58.085-05:00  INFO 30996 --- [lamb-eureka] [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 13ms
+2026-10-29T20:23:58.093-05:00  INFO 30996 --- [lamb-eureka] [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 7ms
+2026-10-29T20:24:58.098-05:00  INFO 30996 --- [lamb-eureka] [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 5ms
+2026-10-29T20:25:58.105-05:00  INFO 30996 --- [lamb-eureka] [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 6ms
+2026-10-29T20:26:58.118-05:00  INFO 30996 --- [lamb-eureka] [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 13ms
+2026-10-29T20:27:58.125-05:00  INFO 30996 --- [lamb-eureka] [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 7ms
+2026-10-29T20:28:58.129-05:00  INFO 30996 --- [lamb-eureka] [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 3ms
+2026-10-29T20:29:58.129-05:00  INFO 30996 --- [lamb-eureka] [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 0ms
+2026-10-29T20:30:58.144-05:00  INFO 30996 --- [lamb-eureka] [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 15ms
+2026-10-29T20:31:58.150-05:00  INFO 30996 --- [lamb-eureka] [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 5ms
+2026-10-29T20:32:58.152-05:00  INFO 30996 --- [lamb-eureka] [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 1ms
+2026-10-29T20:33:57.856-05:00  INFO 30996 --- [lamb-eureka] [hresholdUpdater] c.n.e.r.PeerAwareInstanceRegistryImpl    : Current renewal threshold is : 0
+2026-10-29T20:33:58.167-05:00  INFO 30996 --- [lamb-eureka] [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 15ms
+2026-10-29T20:34:58.168-05:00  INFO 30996 --- [lamb-eureka] [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 0ms
+2026-10-29T20:35:58.168-05:00  INFO 30996 --- [lamb-eureka] [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 0ms
+2026-10-29T20:36:58.168-05:00  INFO 30996 --- [lamb-eureka] [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 0ms
+2026-10-29T20:37:58.168-05:00  INFO 30996 --- [lamb-eureka] [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 0ms
+2026-10-29T20:38:58.170-05:00  INFO 30996 --- [lamb-eureka] [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 1ms
+2026-10-29T20:39:58.170-05:00  INFO 30996 --- [lamb-eureka] [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 0ms
+2026-10-29T20:40:58.171-05:00  INFO 30996 --- [lamb-eureka] [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 0ms
+2026-10-29T20:41:58.172-05:00  INFO 30996 --- [lamb-eureka] [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 0ms
+2026-10-29T20:42:58.173-05:00  INFO 30996 --- [lamb-eureka] [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 1ms
+2026-10-29T20:43:58.173-05:00  INFO 30996 --- [lamb-eureka] [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 0ms
+2026-10-29T20:44:48.380-05:00  INFO 30996 --- [lamb-eureka] [io-18761-exec-8] c.n.e.registry.AbstractInstanceRegistry  : Registered instance LAMB-MATRICULA-MS/lamb-matricula-ms:8085 with status UP (replication=false)
+2026-10-29T20:44:49.188-05:00  INFO 30996 --- [lamb-eureka] [io-18761-exec-7] c.n.e.registry.AbstractInstanceRegistry  : Registered instance LAMB-MATRICULA-MS/lamb-matricula-ms:8085 with status UP (replication=true)
+2026-10-29T20:44:55.078-05:00  INFO 30996 --- [lamb-eureka] [io-18761-exec-5] c.n.e.registry.AbstractInstanceRegistry  : Registered instance LAMB-FINANZAS-MS/lamb-finanzas-ms:8087 with status UP (replication=false)
+2026-10-29T20:44:55.585-05:00  INFO 30996 --- [lamb-eureka] [o-18761-exec-10] c.n.e.registry.AbstractInstanceRegistry  : Registered instance LAMB-FINANZAS-MS/lamb-finanzas-ms:8087 with status UP (replication=true)
+2026-10-29T20:44:58.174-05:00  INFO 30996 --- [lamb-eureka] [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 0ms
+2026-10-29T20:45:58.175-05:00  INFO 30996 --- [lamb-eureka] [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 0ms
+2026-10-29T20:46:58.176-05:00  INFO 30996 --- [lamb-eureka] [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 1ms
+2026-10-29T20:47:58.177-05:00  INFO 30996 --- [lamb-eureka] [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 0ms
+2026-10-29T20:48:57.856-05:00  INFO 30996 --- [lamb-eureka] [hresholdUpdater] c.n.e.r.PeerAwareInstanceRegistryImpl    : Current renewal threshold is : 0
+2026-10-29T20:48:58.178-05:00  INFO 30996 --- [lamb-eureka] [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 0ms
+2026-10-29T20:49:58.179-05:00  INFO 30996 --- [lamb-eureka] [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 0ms
+2026-10-29T20:50:58.179-05:00  INFO 30996 --- [lamb-eureka] [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 0ms
+2026-10-29T20:51:58.191-05:00  INFO 30996 --- [lamb-eureka] [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 12ms
+2026-10-29T20:52:58.202-05:00  INFO 30996 --- [lamb-eureka] [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 11ms
+2026-10-29T20:53:58.210-05:00  INFO 30996 --- [lamb-eureka] [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 8ms
+2026-10-29T20:54:58.221-05:00  INFO 30996 --- [lamb-eureka] [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 11ms
+2026-10-29T20:55:58.227-05:00  INFO 30996 --- [lamb-eureka] [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 5ms

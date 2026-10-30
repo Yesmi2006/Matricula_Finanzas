@@ -22,4 +22,5 @@ public class MatriculaResponse {
     private Instant fecha;
     private EstadoMatricula estado;
     private List<DetalleMatriculaResponse> detalles;
+    private List<CondicionMatriculaResponse> condiciones;
 }

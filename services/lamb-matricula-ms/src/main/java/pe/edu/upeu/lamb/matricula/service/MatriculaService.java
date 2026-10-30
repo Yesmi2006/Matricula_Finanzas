@@ -3,6 +3,7 @@ package pe.edu.upeu.lamb.matricula.service;
 import pe.edu.upeu.lamb.matricula.dto.MatriculaRequest;
 import pe.edu.upeu.lamb.matricula.dto.MatriculaResponse;
 import pe.edu.upeu.lamb.matricula.dto.SeccionDisponibleDto;
+import pe.edu.upeu.lamb.matricula.entity.CondicionMatricula;
 import pe.edu.upeu.lamb.matricula.entity.DetalleMatricula;
 import pe.edu.upeu.lamb.matricula.entity.EstadoMatricula;
 import pe.edu.upeu.lamb.matricula.entity.Matricula;
@@ -11,6 +12,7 @@ import pe.edu.upeu.lamb.matricula.exception.BusinessRuleException;
 import pe.edu.upeu.lamb.matricula.exception.ResourceNotFoundException;
 import pe.edu.upeu.lamb.matricula.mapper.MatriculaMapper;
 import pe.edu.upeu.lamb.matricula.messaging.MatriculaEventosProducer;
+import pe.edu.upeu.lamb.matricula.repository.CondicionMatriculaRepository;
 import pe.edu.upeu.lamb.matricula.repository.MatriculaRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -31,6 +33,7 @@ public class MatriculaService {
     private final MatriculaMapper matriculaMapper;
     private final MatriculaEventosProducer producer;
     private final PlanificacionConsultaService planificacionConsultaService;
+    private final CondicionMatriculaRepository condicionMatriculaRepository;
 
     public List<MatriculaResponse> listar() {
         return matriculaRepository.findAll().stream()
@@ -101,6 +104,26 @@ public class MatriculaService {
             return matriculaMapper.toResponse(matricula);
         }
         matricula.setEstado(EstadoMatricula.ANULADA);
+        return matriculaMapper.toResponse(matriculaRepository.save(matricula));
+    }
+
+    /**
+     * Asocia una CondicionMatricula (ingresante, reingresante, repitente, traslado)
+     * a la matricula. Relacion muchos a muchos real via tabla matricula_condicion.
+     */
+    public MatriculaResponse agregarCondicion(Long id, Long idCondicion) {
+        Matricula matricula = buscarOFallar(id);
+        CondicionMatricula condicion = condicionMatriculaRepository.findById(idCondicion)
+                .orElseThrow(() -> new ResourceNotFoundException("CondicionMatricula no encontrada: " + idCondicion));
+        if (!matricula.getCondiciones().contains(condicion)) {
+            matricula.getCondiciones().add(condicion);
+        }
+        return matriculaMapper.toResponse(matriculaRepository.save(matricula));
+    }
+
+    public MatriculaResponse quitarCondicion(Long id, Long idCondicion) {
+        Matricula matricula = buscarOFallar(id);
+        matricula.getCondiciones().removeIf(c -> c.getId().equals(idCondicion));
         return matriculaMapper.toResponse(matriculaRepository.save(matricula));
     }
 

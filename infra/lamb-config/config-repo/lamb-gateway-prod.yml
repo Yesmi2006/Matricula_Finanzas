@@ -44,6 +44,30 @@ spring:
               uri: lb://lamb-matricula-ms
               predicates:
                 - Path=/api/v1/matriculas/**
+            - id: lamb-matricula-calendario-periodos
+              uri: lb://lamb-matricula-ms
+              predicates:
+                - Path=/api/v1/calendario-periodos/**
+            - id: lamb-matricula-reglas-requisitos
+              uri: lb://lamb-matricula-ms
+              predicates:
+                - Path=/api/v1/reglas-requisitos/**
+            - id: lamb-matricula-oferta-cupos
+              uri: lb://lamb-matricula-ms
+              predicates:
+                - Path=/api/v1/oferta-cupos/**
+            - id: lamb-matricula-situacion-estudiante
+              uri: lb://lamb-matricula-ms
+              predicates:
+                - Path=/api/v1/situacion-estudiante/**
+            - id: lamb-matricula-cursos-carga-academica
+              uri: lb://lamb-matricula-ms
+              predicates:
+                - Path=/api/v1/cursos-carga-academica/**
+            - id: lamb-matricula-rectificacion-retiro-reactivacion
+              uri: lb://lamb-matricula-ms
+              predicates:
+                - Path=/api/v1/rectificacion-retiro-reactivacion/**
             - id: lamb-evaluacion
               uri: lb://lamb-evaluacion-ms
               predicates:
@@ -60,6 +84,38 @@ spring:
               uri: lb://lamb-finanzas-ms
               predicates:
                 - Path=/api/v1/pagos/**
+            - id: lamb-finanzas-saldo-estudiante
+              uri: lb://lamb-finanzas-ms
+              predicates:
+                - Path=/api/v1/saldo-estudiante/**
+            - id: lamb-finanzas-catalogos-tarifas
+              uri: lb://lamb-finanzas-ms
+              predicates:
+                - Path=/api/v1/catalogos-tarifas/**
+            - id: lamb-finanzas-calendario-planes
+              uri: lb://lamb-finanzas-ms
+              predicates:
+                - Path=/api/v1/calendario-planes/**
+            - id: lamb-finanzas-descuentos-becas
+              uri: lb://lamb-finanzas-ms
+              predicates:
+                - Path=/api/v1/descuentos-becas/**
+            - id: lamb-finanzas-cobros
+              uri: lb://lamb-finanzas-ms
+              predicates:
+                - Path=/api/v1/cobros/**
+            - id: lamb-finanzas-comprobantes
+              uri: lb://lamb-finanzas-ms
+              predicates:
+                - Path=/api/v1/comprobantes/**
+            - id: lamb-finanzas-reembolsos-cancelaciones
+              uri: lb://lamb-finanzas-ms
+              predicates:
+                - Path=/api/v1/reembolsos-cancelaciones/**
+            - id: lamb-finanzas-control-cierre
+              uri: lb://lamb-finanzas-ms
+              predicates:
+                - Path=/api/v1/control-cierre/**
 
 eureka:
   instance:

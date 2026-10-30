@@ -14,6 +14,7 @@ import java.time.Instant;
 public class MatriculaMapper {
 
     private final DetalleMatriculaMapper detalleMatriculaMapper;
+    private final CondicionMatriculaMapper condicionMatriculaMapper;
 
     public Matricula toEntity(MatriculaRequest request) {
         Matricula matricula = Matricula.builder()
@@ -40,6 +41,7 @@ public class MatriculaMapper {
                 .fecha(matricula.getFecha())
                 .estado(matricula.getEstado())
                 .detalles(matricula.getDetalles().stream().map(detalleMatriculaMapper::toResponse).toList())
+                .condiciones(matricula.getCondiciones().stream().map(condicionMatriculaMapper::toResponse).toList())
                 .build();
     }
 }

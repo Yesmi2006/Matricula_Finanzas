@@ -132,3 +132,20 @@ S11: integración frontend Angular + Keycloak. Explícitamente pospuesto hasta t
 3. Si el Bloque 1 quedó incompleto, continuar desde donde se cortó — no repetir desde cero lo que ya esté hecho y compilando.
 4. Si el Bloque 1 ya está completo y validado, seguir con el Bloque 2, dominio por dominio (no los 12 de una vez).
 5. Mantener la misma regla: las guías `.md` de sesión mandan sobre lo que ya exista copiado de D:.
+
+## 7. Nota — Unificación de controladores matrícula/finanzas (según MATRICULAS_Y_FINANZAS.docx)
+
+Refactor de controllers en `lamb-matricula-ms` y `lamb-finanzas-ms` para que cada dominio (Título 2 del doc) tenga 1 solo controller raíz con subrutas, en vez de 1 controller por atributo.
+
+- **Corrección 2026-10-29**: el conteo original de esta nota (34→7 / 35→9) era aritméticamente incorrecto. Conteo verificado contra el `rm -f` real ejecutado en sesión: **37→7** (matrícula) y **37→9** (finanzas), total **74→16**.
+- **lamb-matricula-ms**: 37 controllers → 7 (`CalendarioPeriodosController`, `ReglasRequisitosController`, `OfertaCuposController`, `MatriculaController`, `SituacionEstudianteController`, `CursosCargaAcademicaController`, `RectificacionRetiroReactivacionController`). Rutas saga `/api/v1/matriculas/**` intactas (`confirmar`, `anular`, `agregarCondicion`, `quitarCondicion` verificados presentes en `MatriculaController`).
+- **lamb-finanzas-ms**: 37 controllers → 9 (`SaldoEstudianteController`, `CatalogosTarifasController`, `CalendarioPlanesController`, `DescuentosBecasController`, `CobrosController`, `PagoController`, `ComprobantesController`, `ReembolsosCancelacionesController`, `ControlCierreController`). Rutas saga `/api/v1/pagos/**` intactas (`reembolsar` verificado presente en `PagoController`).
+- Services/mappers/DTOs/entities/repositories sin tocar — solo se fusionaron controllers.
+- Swagger: verificado por grep que los 16 raíces (7+9) tienen `@Tag` — `grep -l "@Tag" *.java | wc -l` = 7 y 9 respectivamente. `@Operation` por endpoint.
+- Gateway: rutas nuevas agregadas en `infra/lamb-config/config-repo/lamb-gateway-dev.yml` y `lamb-gateway-prod.yml` (6 matrícula + 8 finanzas, además de las ya existentes `lamb-matricula`/`lamb-finanzas`).
+- Seguridad: `infra/lamb-gateway/.../SecurityConfig.java` — arrays `MATRICULA_DOMINIOS` y `FINANZAS_DOMINIOS` con reglas GET-autenticado / escritura por rol (mismo patrón que matriculas/pagos).
+- `EXTERNAL_IDS.md` de ambos servicios revisado — sin cambios, documentan a nivel de campo/entidad, no de controller.
+- Verificado en 2026-10-29: cada uno de los 37+37 subresources originales conserva su trío listar(GET)/obtener(GET)/crear(POST) en el raíz correspondiente (confirmado vía grep sobre el código actual, no solo por diseño). No se encontró ningún endpoint PUT/PATCH huérfano; los únicos endpoints no-CRUD (`confirmar`, `anular`, `agregarCondicion`, `quitarCondicion`, `reembolsar`) pertenecen a los 2 raíces que nunca se borraron (`MatriculaController`, `PagoController`) y están confirmados presentes.
+- Los 7+9 = 16 directorios de controllers no contienen ningún archivo residual de los 74 originales (confirmado por `ls`: exactamente 7 y 9 archivos).
+- Los 3 módulos compilan limpio en esta verificación (2026-10-29): `lamb-matricula-ms`, `lamb-finanzas-ms`, `infra/lamb-gateway` (`./mvnw -DskipTests compile`, exit 0 los tres).
+- Pendiente: verificar visualmente en Swagger UI (localhost:8085 y 8087) que aparecen los 16 grupos — no se levantaron los servicios en esta sesión.

@@ -36,4 +36,18 @@ public class Matricula {
     @Builder.Default
     @OneToMany(mappedBy = "matricula", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<DetalleMatricula> detalles = new ArrayList<>();
+
+    /**
+     * Relacion muchos a muchos real: una matricula puede tener varias condiciones
+     * (ingresante, reingresante, repitente, traslado) y cada condicion aplica a
+     * muchas matriculas. Tabla intermedia matricula_condicion.
+     */
+    @Builder.Default
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+            name = "matricula_condicion",
+            joinColumns = @JoinColumn(name = "id_matricula"),
+            inverseJoinColumns = @JoinColumn(name = "id_condicion")
+    )
+    private List<CondicionMatricula> condiciones = new ArrayList<>();
 }
