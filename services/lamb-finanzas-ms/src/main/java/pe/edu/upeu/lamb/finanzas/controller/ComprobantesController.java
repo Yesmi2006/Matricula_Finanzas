@@ -6,8 +6,6 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-import pe.edu.upeu.lamb.finanzas.dto.AnulacionComprobanteRequest;
-import pe.edu.upeu.lamb.finanzas.dto.AnulacionComprobanteResponse;
 import pe.edu.upeu.lamb.finanzas.dto.DatoFacturacionClienteRequest;
 import pe.edu.upeu.lamb.finanzas.dto.DatoFacturacionClienteResponse;
 import pe.edu.upeu.lamb.finanzas.dto.DocumentoPagoRequest;
@@ -18,7 +16,6 @@ import pe.edu.upeu.lamb.finanzas.dto.NotaDebitoRequest;
 import pe.edu.upeu.lamb.finanzas.dto.NotaDebitoResponse;
 import pe.edu.upeu.lamb.finanzas.dto.SerieCorrelativoComprobanteRequest;
 import pe.edu.upeu.lamb.finanzas.dto.SerieCorrelativoComprobanteResponse;
-import pe.edu.upeu.lamb.finanzas.service.AnulacionComprobanteService;
 import pe.edu.upeu.lamb.finanzas.service.DatoFacturacionClienteService;
 import pe.edu.upeu.lamb.finanzas.service.DocumentoPagoService;
 import pe.edu.upeu.lamb.finanzas.service.NotaCreditoService;
@@ -30,8 +27,7 @@ import java.util.List;
 /**
  * Dominio "Comprobantes" (CRUD unificado). Subrecursos: documento de pago,
  * serie/correlativo de comprobante, dato de facturacion del cliente,
- * anulacion de comprobante, nota de credito (opcional), nota de debito
- * (opcional).
+ * nota de credito (opcional), nota de debito (opcional).
  */
 @RestController
 @RequestMapping("/api/v1/comprobantes")
@@ -42,7 +38,6 @@ public class ComprobantesController {
     private final DocumentoPagoService documentoPagoService;
     private final SerieCorrelativoComprobanteService serieCorrelativoComprobanteService;
     private final DatoFacturacionClienteService datoFacturacionClienteService;
-    private final AnulacionComprobanteService anulacionComprobanteService;
     private final NotaCreditoService notaCreditoService;
     private final NotaDebitoService notaDebitoService;
 
@@ -107,27 +102,6 @@ public class ComprobantesController {
     @Operation(summary = "Crear un dato de facturacion del cliente")
     public DatoFacturacionClienteResponse crearDatoFacturacion(@Valid @RequestBody DatoFacturacionClienteRequest request) {
         return datoFacturacionClienteService.crear(request);
-    }
-
-    // --- Anulacion de comprobante ---
-
-    @GetMapping("/anulaciones-comprobante")
-    @Operation(summary = "Listar anulaciones de comprobante")
-    public List<AnulacionComprobanteResponse> listarAnulacionesComprobante() {
-        return anulacionComprobanteService.listar();
-    }
-
-    @GetMapping("/anulaciones-comprobante/{id}")
-    @Operation(summary = "Obtener una anulacion de comprobante")
-    public AnulacionComprobanteResponse obtenerAnulacionComprobante(@PathVariable Long id) {
-        return anulacionComprobanteService.obtener(id);
-    }
-
-    @PostMapping("/anulaciones-comprobante")
-    @ResponseStatus(HttpStatus.CREATED)
-    @Operation(summary = "Crear una anulacion de comprobante")
-    public AnulacionComprobanteResponse crearAnulacionComprobante(@Valid @RequestBody AnulacionComprobanteRequest request) {
-        return anulacionComprobanteService.crear(request);
     }
 
     // --- Nota de credito (opcional) ---

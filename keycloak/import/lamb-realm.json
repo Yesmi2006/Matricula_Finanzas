@@ -3,6 +3,9 @@
   "enabled": true,
   "sslRequired": "none",
   "registrationAllowed": false,
+  "attributes": {
+    "userProfileConfig": "{\"attributes\":[{\"name\":\"username\",\"permissions\":{\"view\":[\"admin\",\"user\"],\"edit\":[\"admin\",\"user\"]},\"multivalued\":false},{\"name\":\"email\",\"permissions\":{\"view\":[\"admin\",\"user\"],\"edit\":[\"admin\",\"user\"]},\"multivalued\":false},{\"name\":\"firstName\",\"permissions\":{\"view\":[\"admin\",\"user\"],\"edit\":[\"admin\",\"user\"]},\"multivalued\":false},{\"name\":\"lastName\",\"permissions\":{\"view\":[\"admin\",\"user\"],\"edit\":[\"admin\",\"user\"]},\"multivalued\":false},{\"name\":\"idPersona\",\"displayName\":\"ID Persona\",\"permissions\":{\"view\":[\"admin\"],\"edit\":[\"admin\"]},\"multivalued\":false}],\"groups\":[{\"name\":\"user-metadata\",\"displayHeader\":\"User metadata\",\"displayDescription\":\"Attributes, which refer to user metadata\"}]}"
+  },
   "roles": {
     "realm": [
       { "name": "ADMIN", "description": "Administrador del sistema" },
@@ -72,6 +75,19 @@
       "attributes": { "idPersona": ["2"] }
     },
     {
+      "username": "coordinador1",
+      "email": "coordinador1@lamb.upeu.edu.pe",
+      "emailVerified": true,
+      "enabled": true,
+      "firstName": "Coordinador",
+      "lastName": "Uno",
+      "credentials": [
+        { "type": "password", "value": "coordinador123", "temporary": false }
+      ],
+      "realmRoles": ["COORDINADOR"],
+      "attributes": { "idPersona": ["4"] }
+    },
+    {
       "username": "estudiante1",
       "email": "estudiante1@lamb.upeu.edu.pe",
       "emailVerified": true,
@@ -83,6 +99,19 @@
       ],
       "realmRoles": ["ESTUDIANTE"],
       "attributes": { "idPersona": ["3"] }
+    },
+    {
+      "username": "estudiante2",
+      "email": "estudiante2@lamb.upeu.edu.pe",
+      "emailVerified": true,
+      "enabled": true,
+      "firstName": "Estudiante",
+      "lastName": "Dos",
+      "credentials": [
+        { "type": "password", "value": "estudiante123", "temporary": false }
+      ],
+      "realmRoles": ["ESTUDIANTE"],
+      "attributes": { "idPersona": ["5"] }
     }
   ]
 }

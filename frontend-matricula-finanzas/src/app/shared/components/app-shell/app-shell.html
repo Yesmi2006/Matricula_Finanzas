@@ -1,0 +1,46 @@
+<div class="shell">
+  <header class="shell__header">
+    <div class="shell__brand">
+      <span class="shell__brand-badge">LF</span>
+      <span class="shell__brand-text">Lamb University · {{ domainLabel }}</span>
+    </div>
+    <nav class="shell__contacts">
+      <span>Campus Central: (01) 555-0101</span>
+      <span>Campus Norte: (01) 555-0202</span>
+      <span>Campus Sur: (01) 555-0303</span>
+    </nav>
+    <div class="shell__user">
+      <div class="shell__user-info">
+        <span class="shell__user-name">{{ usuario()?.nombre ?? 'Usuario' }}</span>
+        <span class="shell__user-email">{{ usuario()?.email }}</span>
+      </div>
+      <button class="shell__logout" (click)="logout()" title="Cerrar sesión">⏻</button>
+    </div>
+  </header>
+
+  <div class="shell__body">
+    <aside class="shell__sidebar">
+      <a class="shell__sidebar-home" routerLink="/">← Inicio</a>
+      <nav>
+        @for (group of groups; track group.key) {
+          <div class="shell__group">
+            <div class="shell__group-label">{{ group.label }}</div>
+            @for (resource of group.resources; track resource.key) {
+              <a
+                class="shell__link"
+                [routerLink]="['/', domainKey, group.key, resource.key]"
+                routerLinkActive="shell__link--active"
+              >
+                {{ resource.label }}
+              </a>
+            }
+          </div>
+        }
+      </nav>
+    </aside>
+
+    <main class="shell__content">
+      <router-outlet></router-outlet>
+    </main>
+  </div>
+</div>

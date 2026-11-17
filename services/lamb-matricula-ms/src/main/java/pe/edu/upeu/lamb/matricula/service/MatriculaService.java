@@ -27,7 +27,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class MatriculaService {
 
-    private static final String MATRICULA_CONFIRMADA = "matricula.confirmada";
+    private static final String MATRICULA_REGISTRADA = "matricula.registrada";
 
     private final MatriculaRepository matriculaRepository;
     private final MatriculaMapper matriculaMapper;
@@ -35,14 +35,19 @@ public class MatriculaService {
     private final PlanificacionConsultaService planificacionConsultaService;
     private final CondicionMatriculaRepository condicionMatriculaRepository;
 
-    public List<MatriculaResponse> listar() {
-        return matriculaRepository.findAll().stream()
-                .map(matriculaMapper::toResponse)
-                .toList();
+    public List<MatriculaResponse> listar(Long idPersonaSolicitante, boolean privilegiado) {
+        List<Matricula> matriculas = privilegiado
+                ? matriculaRepository.findAll()
+                : matriculaRepository.findByIdPersona(idPersonaSolicitante);
+        return matriculas.stream().map(matriculaMapper::toResponse).toList();
     }
 
-    public MatriculaResponse obtener(Long id) {
-        return matriculaMapper.toResponse(buscarOFallar(id));
+    public MatriculaResponse obtener(Long id, Long idPersonaSolicitante, boolean privilegiado) {
+        Matricula matricula = buscarOFallar(id);
+        if (!privilegiado && !matricula.getIdPersona().equals(idPersonaSolicitante)) {
+            throw new ResourceNotFoundException("Matricula no encontrada: " + id);
+        }
+        return matriculaMapper.toResponse(matricula);
     }
 
     /**
@@ -51,6 +56,7 @@ public class MatriculaService {
      * para no propagar el fallo en cascada; solo se rechaza cuando planificacion SI responde
      * y la seccion no esta ABIERTA.
      */
+    @Transactional
     public MatriculaResponse crear(MatriculaRequest request) {
         Matricula matricula = matriculaMapper.toEntity(request);
         matricula.setEstado(EstadoMatricula.REGISTRADA);
@@ -66,13 +72,23 @@ public class MatriculaService {
                         + " no esta ABIERTA (estado actual: " + seccion.getEstado() + ")");
             }
         }
-        return matriculaMapper.toResponse(matriculaRepository.save(matricula));
+        Matricula guardada = matriculaRepository.save(matricula);
+        producer.publicarTrasCommit(MatriculaConfirmadaEvento.builder()
+                .tipoEvento(MATRICULA_REGISTRADA)
+                .matriculaId(guardada.getId())
+                .idPersona(guardada.getIdPersona())
+                .periodo(guardada.getPeriodo())
+                .timestamp(Instant.now().toEpochMilli())
+                .build());
+        return matriculaMapper.toResponse(guardada);
     }
 
     /**
-     * Idempotente: si ya esta CONFIRMADA no vuelve a procesar ni a publicar el evento
-     * (evita generar un cargo duplicado en finanzas si el cliente reintenta la llamada).
-     * Solo se confirma desde REGISTRADA.
+     * Idempotente: si ya esta CONFIRMADA no vuelve a procesar. Si esta ANULADA tampoco
+     * (p.ej. el estudiante anulo tras pagar, pero el evento pago.aceptado llega despues).
+     * Solo se confirma desde REGISTRADA. La generacion del cargo en finanzas ya no depende
+     * de este metodo: se dispara desde crear() (matricula.registrada); esta llamada ahora
+     * la activa el evento pago.aceptado (saga paga-antes-de-confirmar).
      */
     @Transactional
     public MatriculaResponse confirmar(Long id) {
@@ -81,17 +97,13 @@ public class MatriculaService {
             log.warn("component=processor matriculaId={} status=ignored motivo=\"ya estaba confirmada\"", id);
             return matriculaMapper.toResponse(matricula);
         }
+        if (matricula.getEstado() == EstadoMatricula.ANULADA) {
+            log.warn("component=processor matriculaId={} status=ignored motivo=\"matricula anulada\"", id);
+            return matriculaMapper.toResponse(matricula);
+        }
         validarEstado(matricula, EstadoMatricula.REGISTRADA, "confirmar");
         matricula.setEstado(EstadoMatricula.CONFIRMADA);
         Matricula guardada = matriculaRepository.save(matricula);
-
-        producer.publicarTrasCommit(MatriculaConfirmadaEvento.builder()
-                .tipoEvento(MATRICULA_CONFIRMADA)
-                .matriculaId(guardada.getId())
-                .idPersona(guardada.getIdPersona())
-                .periodo(guardada.getPeriodo())
-                .timestamp(Instant.now().toEpochMilli())
-                .build());
         log.info("component=processor matriculaId={} idPersona={} estado={} status=processed",
                 guardada.getId(), guardada.getIdPersona(), guardada.getEstado());
         return matriculaMapper.toResponse(guardada);

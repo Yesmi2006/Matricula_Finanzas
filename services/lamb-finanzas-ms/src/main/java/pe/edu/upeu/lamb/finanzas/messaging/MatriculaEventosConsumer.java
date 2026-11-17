@@ -12,14 +12,14 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 public class MatriculaEventosConsumer {
 
-    private static final String MATRICULA_CONFIRMADA = "matricula.confirmada";
+    private static final String MATRICULA_REGISTRADA = "matricula.registrada";
 
     private final PagoService pagoService;
 
     @KafkaListener(topics = "${app.kafka.topic.matricula}",
             properties = "spring.json.value.default.type=pe.edu.upeu.lamb.finanzas.event.MatriculaConfirmadaEvento")
     public void alRecibirMatricula(MatriculaConfirmadaEvento evento) {
-        if (!MATRICULA_CONFIRMADA.equals(evento.getTipoEvento())) {
+        if (!MATRICULA_REGISTRADA.equals(evento.getTipoEvento())) {
             log.warn("component=consumer eventType={} status=ignored", evento.getTipoEvento());
             return;
         }

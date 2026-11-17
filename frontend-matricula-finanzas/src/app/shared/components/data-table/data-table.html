@@ -1,0 +1,51 @@
+<div class="table-card">
+  <div class="table-card__toolbar">
+    <h2>{{ config.label }}</h2>
+    <button class="btn btn--primary" (click)="createNew.emit()">+ Nuevo</button>
+  </div>
+
+  @if (config.description) {
+    <p class="table-card__hint">{{ config.description }}</p>
+  }
+
+  <div class="table-card__scroll">
+    <table>
+      <thead>
+        <tr>
+          @for (col of columns(); track col) {
+            <th>{{ col }}</th>
+          }
+          <th class="table-card__actions-col">Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (row of rows; track row['id']) {
+          <tr>
+            @for (col of columns(); track col) {
+              <td>{{ value(row, col) }}</td>
+            }
+            <td class="table-card__actions">
+              <button class="btn btn--ghost" (click)="edit.emit(row)">Editar</button>
+              <button class="btn btn--danger" (click)="remove.emit(row)">Eliminar</button>
+              @for (action of config.rowActions ?? []; track action.key) {
+                <button
+                  class="btn"
+                  [class.btn--primary]="action.cssClass === 'primary'"
+                  [class.btn--danger]="action.cssClass === 'danger'"
+                  [class.btn--ghost]="action.cssClass === 'ghost'"
+                  (click)="rowAction.emit({ action: action.key, row })"
+                >
+                  {{ action.label }}
+                </button>
+              }
+            </td>
+          </tr>
+        } @empty {
+          <tr>
+            <td [attr.colspan]="columns().length + 1" class="table-card__empty">Sin datos</td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+</div>

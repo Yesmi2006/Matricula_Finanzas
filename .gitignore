@@ -7,3 +7,17 @@ hs_err_pid*.log
 replay_pid*.log
 restart-*.log
 *-20[0-9][0-9]-[0-9][0-9]-[0-9][0-9].log
+
+logs/
+*.log
+*.log.*
+target/
+node_modules/
+.angular/
+dist/
+scripts/run/
+.idea/
+.vscode/
+keycloak/profile.json
+keycloak/profile_new.json
+/package-lock.json

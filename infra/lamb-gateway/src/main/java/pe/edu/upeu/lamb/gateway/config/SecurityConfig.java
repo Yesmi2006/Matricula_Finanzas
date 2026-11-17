@@ -9,6 +9,9 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationConverter;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 import java.util.Collection;
 import java.util.List;
@@ -58,15 +61,32 @@ public class SecurityConfig {
         return converter;
     }
 
+    // CORS para el frontend Angular en dev (localhost:4200). Debe ejecutarse antes del filtro de seguridad
+    // para que el preflight OPTIONS reciba Access-Control-Allow-Origin sin pasar por autenticacion.
+    @Bean
+    public CorsConfigurationSource corsConfigurationSource() {
+        CorsConfiguration config = new CorsConfiguration();
+        config.setAllowedOrigins(List.of("http://localhost:4200"));
+        config.setAllowedMethods(List.of("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"));
+        config.setAllowedHeaders(List.of("*"));
+        config.setAllowCredentials(true);
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", config);
+        return source;
+    }
+
     // Primera linea: reglas por ruta, metodo y rol. Spring aplica la primera regla que coincide.
     // Segunda linea (JwtAuthenticationConverter + oauth2ResourceServer): la valida cada microservicio por su cuenta.
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http,
-                                                   JwtAuthenticationConverter jwtAuthenticationConverter) throws Exception {
+                                                   JwtAuthenticationConverter jwtAuthenticationConverter,
+                                                   CorsConfigurationSource corsConfigurationSource) throws Exception {
         http
                 .csrf(csrf -> csrf.disable())
+                .cors(cors -> cors.configurationSource(corsConfigurationSource))
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
+                        .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
                         .requestMatchers("/actuator/**", "/error").permitAll()
                         .requestMatchers(HttpMethod.GET, ACADEMICO).authenticated()
                         .requestMatchers(ACADEMICO).hasAnyRole("ADMIN", "COORDINADOR")
@@ -78,8 +98,13 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.GET, INSTITUCIONAL_PERSONAS).authenticated()
                         .requestMatchers(INSTITUCIONAL_PERSONAS).hasAnyRole("ADMIN", "COORDINADOR")
                         .requestMatchers(HttpMethod.GET, "/api/v1/matriculas/**").authenticated()
+                        .requestMatchers(HttpMethod.POST, "/api/v1/matriculas/*/confirmar", "/api/v1/matriculas/*/anular")
+                        .hasAnyRole("ADMIN", "COORDINADOR")
                         .requestMatchers("/api/v1/matriculas/**").hasAnyRole("ADMIN", "COORDINADOR", "ESTUDIANTE")
                         .requestMatchers(HttpMethod.GET, "/api/v1/pagos/**").authenticated()
+                        .requestMatchers(HttpMethod.POST, "/api/v1/pagos/*/aceptar", "/api/v1/pagos/*/rechazar")
+                        .hasAnyRole("ADMIN", "COORDINADOR")
+                        .requestMatchers(HttpMethod.POST, "/api/v1/pagos").hasAnyRole("ADMIN", "COORDINADOR", "ESTUDIANTE")
                         .requestMatchers("/api/v1/pagos/**").hasAnyRole("ADMIN", "COORDINADOR")
                         .requestMatchers(HttpMethod.GET, MATRICULA_DOMINIOS).authenticated()
                         .requestMatchers(MATRICULA_DOMINIOS).hasAnyRole("ADMIN", "COORDINADOR", "ESTUDIANTE")

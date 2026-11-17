@@ -1,0 +1,25 @@
+@if (error()) {
+  <div class="alert">{{ error() }}</div>
+}
+
+@if (showForm()) {
+  <app-resource-form
+    [config]="config"
+    [value]="editing()"
+    (save)="onSave($event)"
+    (cancel)="onCancel()"
+  ></app-resource-form>
+}
+
+@if (loading()) {
+  <p class="loading">Cargando…</p>
+} @else {
+  <app-data-table
+    [config]="config"
+    [rows]="rows()"
+    (createNew)="onCreateNew()"
+    (edit)="onEdit($event)"
+    (remove)="onRemove($event)"
+    (rowAction)="onRowAction($event)"
+  ></app-data-table>
+}

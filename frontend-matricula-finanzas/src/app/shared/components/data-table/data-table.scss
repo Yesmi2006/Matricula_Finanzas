@@ -1,0 +1,92 @@
+.table-card {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+  padding: 1.25rem 1.5rem;
+
+  &__toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 0.5rem;
+
+    h2 {
+      margin: 0;
+      font-size: 1.1rem;
+      color: var(--navy-900);
+    }
+  }
+
+  &__hint {
+    font-size: 0.82rem;
+    color: #666;
+    margin: 0 0 0.75rem;
+  }
+
+  &__scroll {
+    overflow-x: auto;
+  }
+
+  &__empty {
+    text-align: center;
+    color: #999;
+    padding: 1.5rem 0;
+  }
+
+  &__actions {
+    display: flex;
+    gap: 0.4rem;
+    white-space: nowrap;
+  }
+
+  &__actions-col {
+    width: 1%;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.86rem;
+  }
+
+  th,
+  td {
+    text-align: left;
+    padding: 0.55rem 0.75rem;
+    border-bottom: 1px solid #eef0f4;
+    white-space: nowrap;
+  }
+
+  th {
+    color: #667;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.72rem;
+    letter-spacing: 0.03em;
+  }
+}
+
+.btn {
+  border: none;
+  border-radius: 6px;
+  padding: 0.4rem 0.8rem;
+  font-size: 0.8rem;
+  cursor: pointer;
+  background: #eef0f4;
+  color: #333;
+
+  &--primary {
+    background: var(--teal-500);
+    color: #fff;
+  }
+
+  &--danger {
+    background: #e2574c;
+    color: #fff;
+  }
+
+  &--ghost {
+    background: transparent;
+    border: 1px solid #ccd2dd;
+  }
+}

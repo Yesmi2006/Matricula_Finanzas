@@ -13,4 +13,9 @@ public class KafkaTopicsConfig {
     public NewTopic matriculaEventos(@Value("${app.kafka.topic.matricula}") String nombre) {
         return TopicBuilder.name(nombre).partitions(3).replicas(1).build();
     }
+
+    @Bean
+    public NewTopic pagoAceptadoEventos(@Value("${app.kafka.topic.pago-aceptado}") String nombre) {
+        return TopicBuilder.name(nombre).partitions(3).replicas(1).build();
+    }
 }

@@ -14,11 +14,16 @@ public class PagoMapper {
     public Pago toEntity(PagoRequest request) {
         return Pago.builder()
                 .idPersona(request.getIdPersona())
+                .matriculaId(request.getMatriculaId())
                 .concepto(request.getConcepto())
                 .monto(request.getMonto())
                 .metodo(request.getMetodo())
                 .estado(EstadoPago.PENDIENTE)
                 .fechaPago(Instant.now())
+                .numeroOperacion(request.getNumeroOperacion())
+                .bancoReferencia(request.getBancoReferencia())
+                .fechaVoucher(request.getFechaVoucher())
+                .archivoVoucher(request.getArchivoVoucher())
                 .build();
     }
 
@@ -33,6 +38,10 @@ public class PagoMapper {
                 .estado(pago.getEstado())
                 .fechaPago(pago.getFechaPago())
                 .referenciaExterna(pago.getReferenciaExterna())
+                .numeroOperacion(pago.getNumeroOperacion())
+                .bancoReferencia(pago.getBancoReferencia())
+                .fechaVoucher(pago.getFechaVoucher())
+                .archivoVoucher(pago.getArchivoVoucher())
                 .build();
     }
 }

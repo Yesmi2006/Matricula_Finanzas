@@ -1,0 +1,35 @@
+<div class="hub">
+  <header class="hub__header">
+    <div class="hub__brand">
+      <span class="hub__brand-badge">{{ inicial() }}</span>
+      <span>{{ inicial() }} | UPeU</span>
+    </div>
+    <div class="hub__user">
+      <span class="hub__calendar">📅</span>
+      <div class="hub__user-info">
+        <span class="hub__user-name">{{ usuario()?.nombre ?? 'Usuario' }}</span>
+        <span class="hub__user-filial">{{ usuario()?.email }}</span>
+      </div>
+      <span class="hub__avatar">{{ avatarIniciales() }}</span>
+      <button class="hub__logout" (click)="logout()" title="Cerrar sesión">⏻</button>
+    </div>
+  </header>
+
+  <main class="hub__main">
+    <div class="hub__tiles">
+      <a class="hub__tile" routerLink="/matricula">
+        <span class="hub__tile-icon">🎓</span>
+        <span class="hub__tile-label">Matrícula</span>
+      </a>
+      <a class="hub__tile hub__tile--active" routerLink="/finanzas">
+        <span class="hub__tile-icon">💳</span>
+        <span class="hub__tile-label">Finanzas</span>
+      </a>
+    </div>
+  </main>
+
+  <footer class="hub__footer">
+    <span>versión 1.0</span>
+    <span class="hub__status"><span class="hub__dot"></span> En línea</span>
+  </footer>
+</div>

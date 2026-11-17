@@ -9,6 +9,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
 @Getter
 @Setter
@@ -16,6 +17,9 @@ public class PagoRequest {
 
     @NotNull
     private Long idPersona;
+
+    @NotNull
+    private Long matriculaId;
 
     @NotBlank
     @Size(max = 150)
@@ -27,4 +31,15 @@ public class PagoRequest {
 
     @NotNull
     private MetodoPago metodo;
+
+    @Size(max = 50)
+    private String numeroOperacion;
+
+    @Size(max = 100)
+    private String bancoReferencia;
+
+    private LocalDateTime fechaVoucher;
+
+    @Size(max = 255)
+    private String archivoVoucher;
 }

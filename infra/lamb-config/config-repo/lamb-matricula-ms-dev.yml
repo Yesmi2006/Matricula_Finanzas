@@ -22,6 +22,16 @@ spring:
       value-serializer: org.springframework.kafka.support.serializer.JacksonJsonSerializer
       properties:
         spring.json.add.type.headers: false
+    consumer:
+      group-id: lamb-matricula-ms
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.ErrorHandlingDeserializer
+      properties:
+        spring.deserializer.value.delegate.class: org.springframework.kafka.support.serializer.JacksonJsonDeserializer
+        spring.json.value.default.type: pe.edu.upeu.lamb.matricula.event.PagoAceptadoEvento
+        spring.json.trusted.packages: pe.edu.upeu.lamb.matricula.event
+        spring.json.use.type.headers: false
   jpa:
     hibernate:
       ddl-auto: validate
@@ -47,6 +57,7 @@ app:
   kafka:
     topic:
       matricula: matricula-eventos
+      pago-aceptado: pago-aceptado-eventos
 
 resilience4j:
   circuitbreaker:
